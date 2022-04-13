@@ -2,25 +2,40 @@ using namespace std;
 
 class Output{
   public:
+    void getData(){
+  		ambil_data.open("api_data.txt");
+      ambil_data >> saku;
+      ambil_data >> jml_bulan;
+      for(int i = 1; i<=jml_bulan; i++){
+          ambil_data >> pengeluaran[i];
+        }
+      
+      ambil_data >> total_pengeluaran;
+      ambil_data >> total_tabungan;
+    
+  		ambil_data.close();
+    }		
+
     void cetak(){
-      cout << "  Pengeluaran Kuliah      : Rp "<<data_file[0]<<endl;
-			cout << "  Pengeluaran Jajan       : Rp "<<data_file[1]<<endl;
-      cout << "  Menabung                : Rp "<<data_file[2]<<endl;
-      cout << "  Pengeluaran Per Bulan   : Rp "<<data_file[3]<<endl;
-      cout << "  Total Pengeluaran       : Rp "<<data_file[4]<<endl;
-      cout << "  Total Uang tabungan     : Rp "<<data_file[5];
+      cout << "Total saku "<< jml_bulan <<" bulan : Rp "<< saku <<endl;
+      cout << "=================================" <<endl;
+      for(int i = 1; i<=jml_bulan; i++){
+      cout << "Bulan ke-"<< i << endl;
+      cout << "Pengeluaran            : Rp " << pengeluaran[i] << endl << endl;
+        }
+      cout << "=================================" <<endl;
+      cout << "Total Pengeluaran      : Rp " << total_pengeluaran << endl;
+      cout << "Total Uang tabungan    : Rp " << total_tabungan << endl;
     }
 
-    void getData(){
-  			ambil_data.open("api_data.txt");
-  			while(!ambil_data.eof()){
-  				ambil_data >> data_file[index];
-  				index += 1;
-  			}
-  			ambil_data.close();
-  	}	
+
   	private :
   		ifstream ambil_data;
-  		string data_file[30];
-  		int index = 0;
+      int jml_bulan;
+      int i, saku;
+      int pengeluaran[20];
+      int total_pengeluaran = 0;
+		  int sisa[20];
+      int total_tabungan = 0;
+
 };
